@@ -104,8 +104,11 @@ const UserLogin = () => {
             withCredentials: true,
           }
         );
+
+        console.log("data",data);
+
         if (!data.status) {
-          console.log("-----3-----");
+          console.log("-----6-----");
 
           removeCookie("jwt");
           navigate("/userLogin");
