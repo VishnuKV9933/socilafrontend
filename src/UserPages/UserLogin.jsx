@@ -14,7 +14,7 @@ import { baseUrl } from '../Utility/utility';
 const UserLogin = () => {
   const [user,setUser]=useState(null)
 
-  console.log("--------------------------1------------------------------");
+
 
   const navigate=useNavigate()
 
@@ -24,7 +24,7 @@ const UserLogin = () => {
   const userId = JSON.parse(localStorage.getItem('userId'));
 
   useEffect(()=>{
-    console.log("--------------------------u1------------------------------");
+   
 
     
     
@@ -38,18 +38,16 @@ const UserLogin = () => {
 
   },[user])
 
-  console.log("--------------------------2------------------------------");
+
 
 
   const [cookies, removeCookie] = useCookies([]);
   const { setProfile } = useContext(ProfileDetailsContext);
 
 
-  console.log("user login react");
 
 
  const generateError =(err) =>{
-  console.log("tost");
   toast.error(err,{
     position:"top-right"
   })
@@ -62,16 +60,16 @@ const UserLogin = () => {
 
   const onSubmit = async (datas) => {
     try {
-      console.log("--------------------------submit------------------------------");
       const  { data }  = await axios.post(
         `${baseUrl}/auth/userlogin`,
-        { ...datas },
+        { ...datas},
         {
           withCredentials: true,
         }
       );
+      console.log(">>>>>>>>>>>hereee>>>>>>>>>>>>>")
       if(data){
-        console.log(data , "rrrrrrrrrrrrrrrrrrrrrrrrrr")
+        console.log(data , "rrrrrrrrrrrr.......rrrrrrrrrrrrrr")
         if(data.errors){ 
           console.log(data.errors);
           const {email,password,block} =data.errors;
@@ -84,6 +82,7 @@ const UserLogin = () => {
             generateError(block)
           }
         }else{ 
+          console.log("here at user login")
           document.cookie=`jwt=${data.token}`
 
     const verifyUser = async () => {
@@ -130,7 +129,6 @@ const UserLogin = () => {
         }
       }
     } catch (err) {
-      console.log("-----5-----");
 
       console.log(err);
       console.log("data");

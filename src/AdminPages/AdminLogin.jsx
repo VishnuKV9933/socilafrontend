@@ -7,6 +7,7 @@ import { baseUrl } from '../Utility/utility';
 
 const AdminLogin = () => {
   console.log("user login react");
+  console.log("user login react");
   const navigate=useNavigate()
  const generateError =(err) =>{
   console.log("tost");
