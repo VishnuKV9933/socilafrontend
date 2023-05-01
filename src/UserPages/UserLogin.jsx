@@ -71,6 +71,7 @@ const UserLogin = () => {
         }
       );
       if(data){
+        console.log(data , "rrrrrrrrrrrrrrrrrrrrrrrrrr")
         if(data.errors){ 
           console.log(data.errors);
           const {email,password,block} =data.errors;
