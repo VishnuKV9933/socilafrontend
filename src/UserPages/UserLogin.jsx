@@ -83,8 +83,7 @@ const UserLogin = () => {
             generateError(block)
           }
         }else{ 
-          
-
+          document.cookie=`jwt=${data.token}`
 
     const verifyUser = async () => {
       console.log("-----1-----");
