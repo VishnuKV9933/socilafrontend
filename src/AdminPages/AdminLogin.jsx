@@ -31,6 +31,7 @@ const AdminLogin = () => {
         }
       );
 console.log("datassssssssssssssssssss");
+document.cookie=`adminjwt=${data.token}`
 console.log(data);
       if(data){
         console.log("------------------data1--------------");

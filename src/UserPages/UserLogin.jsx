@@ -111,7 +111,7 @@ const UserLogin = () => {
           // }
         );
 
-        console.log("data",data);
+        console.log("data-----",data);
 
         if (!data.status) {
           console.log("-----6-----");
