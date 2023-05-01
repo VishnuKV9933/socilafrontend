@@ -67,9 +67,9 @@ const UserLogin = () => {
           withCredentials: true,
         }
       );
-      console.log(">>>>>>>>>>>hereee>>>>>>>>>>>>>")
+   
       if(data){
-        console.log(data , "rrrrrrrrrrrr.......rrrrrrrrrrrrrr")
+        console.log(data , "success")
         if(data.errors){ 
           console.log(data.errors);
           const {email,password,block} =data.errors;
