@@ -96,13 +96,19 @@ const UserLogin = () => {
       } else {
 
         console.log("-----2-----");
+        console.log(token);
 
         const { data } = await axios.post(
           `${baseUrl}/auth`,
-          {},
           {
-            withCredentials: true,
-          }
+
+          },
+          {
+            headers: { authorization: "Bearer "+ token},
+          },
+          // {
+          //   withCredentials: true,
+          // }
         );
 
         console.log("data",data);
