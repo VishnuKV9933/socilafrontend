@@ -82,8 +82,10 @@ const UserLogin = () => {
             generateError(block)
           }
         }else{ 
+          const token=data.token
+          console.log(token,'tokendddddddddddddddddd')
           console.log("here at user login")
-          document.cookie=`jwt=${data.token}`
+          document.cookie=`jwt=${token}`
 
     const verifyUser = async () => {
       console.log("-----1-----");
