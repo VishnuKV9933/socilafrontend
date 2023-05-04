@@ -26,7 +26,7 @@ function UserMangement() {
         setUsers(res.data)
        }
 
-       console.log("users",users);
+     
 
   return (
     <div>

@@ -48,6 +48,9 @@ function PostFormCard2({postAlert,
     }}
 
 
+console.log("textareaRef.current",textareaRef.current);
+
+
   const selectFile=(e)=>{
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {

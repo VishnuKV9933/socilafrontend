@@ -15,20 +15,24 @@ function UserOtpLogin() {
   const [otp, setOtp] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [showOtp, setShowOtp] = useState(false);
+  const [showOtp, setShowOtp] = useState(false)
   const [user, setUser] = useState(null);
   const [reSend, setResend] = useState(true);
   const [reSendNumber, setResendNumber] = useState(null);
   const [timer, setTimer] = useState(0);
+  const [errorControler, setErrorControler] = useState(false);
 
+  const [invalid, setInvalid] = useState(false)
+  
   const generateError = (err) => {
+    console.log("err");
     console.log("tost");
     toast.error(err, {
       position: "top-right",
     });
   };
 
-
+console.log("----------------11--------------------------");
  function callInvalidotptost(){
   console.log("errorcaller");
    generateError("Invalid OTP");
@@ -38,12 +42,40 @@ function UserOtpLogin() {
 
 
   const resendCaller = () => {
-    setPhone(reSendNumber);
-    console.log("resend");
-    onsignup();
+
+    console.log("reeesend");
+  
+    axios
+    .get(`${baseUrl}/auth/otplogin/${phone.slice(3)}`)
+    .then((res) => {
+      if (!res.data.user) {
+       
+        generateError("Mobile number not registered");
+        return null;
+      } else {
+       
+        onCaptchVerify();
+        const appVerifier = window.recaptchaVerifier;
+        const formatPh = "+" + phone;
+        signInWithPhoneNumber(auth, formatPh,appVerifier)
+        .then((confimationResult) => {
+            window.confimationResult = confimationResult; 
+            setLoading(false);
+           
+
+            toast.success("Otp sent successfully!");
+          })
+          .catch((error) => {
+            console.log(error);
+           
+          })
+        }
+      })
   };
 
   function onCaptchVerify() {
+    console.log("----------------12--------------------------");
+    setErrorControler(true)
     if (!window.ecaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
         "recaptcha-container",
@@ -74,6 +106,10 @@ function UserOtpLogin() {
 
   function onsignup() {
 
+    setErrorControler(false)
+
+    console.log("----------------13--------------------------");
+
     setLoading(true);
 
     console.log("signuop");
@@ -93,31 +129,43 @@ function UserOtpLogin() {
       generateError("Invalid Mobile number");
       return null;
     } else {
+      setResendNumber(phone?.slice(3))
       axios
         .get(`${baseUrl}/auth/otplogin/${phone.slice(3)}`)
         .then((res) => {
           if (!res.data.user) {
             setLoading(false);
+            console.log("----------------15--------------------------");
             generateError("Mobile number not registered");
             return null;
           } else {
             setLoading(true);
             onCaptchVerify();
             const appVerifier = window.recaptchaVerifier;
+
+
             const formatPh = "+" + phone;
             signInWithPhoneNumber(auth, formatPh, appVerifier)
-              .then((confimationResult) => {
-                window.confimationResult = confimationResult;
+            .then((confimationResult) => {
+                console.log("----------------16--------------------------");
+               setErrorControler(true)
+                window.confimationResult = confimationResult; 
                 setLoading(false);
                 setShowOtp(true);
-                setResendNumber(phone);
                 startTimer();
 
                 toast.success("Otp sent successfully!");
               })
               .catch((error) => {
                 console.log(error);
-                generateError("Authentication failed try again");
+                console.log("errorControler",errorControler);
+                if(errorControler){
+                  toast.success("Otp sent successfully!");
+                }else{
+
+                  generateError("Authentication failed try again");
+                  setErrorControler(false)
+                }
               });
             setLoading(false);
           }
@@ -125,7 +173,19 @@ function UserOtpLogin() {
     }
   }
 
+  const manageinvalidOtp=()=>{
+
+    setInvalid(true)
+
+     setTimeout(() => {
+      console.log("timeout");
+      setInvalid(false)
+    }, 2000);
+  }
+
   function onOTPVerify() {
+manageinvalidOtp()
+
     console.log("-------1----------");
     setLoading(true);
     window.confimationResult
@@ -181,18 +241,28 @@ function UserOtpLogin() {
 
              (
              <div className="bg-gradient-to-tr to-fuchsia-500 from-sky-300 w-full h-full  rounded-lg border-4	border-pink-600"> 
+<div onClick={()=>{
 
+  setShowOtp(false)
+}
+}>back</div>
               <div className="">
                 <div className="mt-16   flex flex-col  gap-6 justify-center  ">
 
 
-
-
                 {reSend &&
-                    <button  className="" onClick={()=>{onsignup()}}>
+                    <button  className="" onClick={(e)=>{
+                      e.stopPropagation()
+                      onsignup()}}>
                       Resend Otp
                     </button>
                 } 
+
+                {/* {reSend &&
+                    <button  className="" onClick={()=>{resendCaller()}}>
+                      Resend Otp
+                    </button>
+                }  */}
 
 
 
@@ -225,16 +295,15 @@ function UserOtpLogin() {
                     className="flex justify-center items-center gap-3 w-1/2 h-10 bg-white	font-bold	 text-red-500 rounded-md"
                   >
                     {loading && <CgSpinner className="animate-spin" />}
-                    <span>Verify Otp</span>
+                    <span className="text-blue-500">Verify Otp</span>
+
                   </button>
 
                    
-
-
-                    
-
                 </div>
-
+                    {invalid&&
+                    <span className="w-full flex justify-center mt-3 text-red-600 text-sm font-medium">Invalid  Otp</span>
+                    }
 
 
 

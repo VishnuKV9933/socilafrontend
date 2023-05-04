@@ -11,6 +11,20 @@ const [cookies,removeCookie] = useCookies();
 // const [validate,setValidate]=useState(null)
 const userId = JSON.parse(localStorage.getItem('userId'));
 // setValidate(true)
+useEffect(()=>{
+  const getPostUser = async () => {
+   
+    const res = await axios.post(`${baseUrl}/users/getuser`, {
+      userId:userId
+    });
+  if(res.data?.block) {
+    removeCookie("jwt");
+    localStorage.removeItem("userId"); 
+    navigate("/userLogin");}
+  };
+
+  getPostUser()
+},[userId])
 
 useEffect(()=>{
 
