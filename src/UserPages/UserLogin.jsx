@@ -37,8 +37,6 @@ const UserLogin = () => {
   const onSubmit = async (datas) => {
     try {
 
-      // axios.get(`${baseUrl}/auth/user`)
-
       const { data } = await axios.post(
         `${baseUrl}/auth/userlogin`,
         { ...datas },
@@ -67,6 +65,7 @@ const UserLogin = () => {
 
           const verifyUser = async () => {
             console.log("-----1-----");
+
             console.log("cookies.jwt",cookies.jwt);
 
             if (!cookies.jwt) {
@@ -101,6 +100,7 @@ const UserLogin = () => {
               }
             }
           };
+
 console.log("before call");
 
 (function (){
