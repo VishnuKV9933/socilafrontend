@@ -23,7 +23,6 @@ function Suggestion({suggestion,user,suggestionFunction}) {
 
 
       axios.post(`${baseUrl}/notification/follow`,{userId,followingId:suggestion._id}).then((data)=>{
-        console.log(data);
       })
 
     })

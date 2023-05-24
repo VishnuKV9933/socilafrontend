@@ -17,15 +17,7 @@ function Home() {
   const [posts, setPost] = useState([]);
   const navigate = useNavigate();
   const userId = JSON.parse(localStorage.getItem("userId"));
-  console.log("home");
-  // useEffect(() => {
-  //   if (!userId) {
-  //     console.log("navigete home");
-  //     navigate("/userlogin");
-  //   }else{
-
-  //   }
-  // }, []);
+ 
 
   useEffect(() => {
     const getUser = async () => {

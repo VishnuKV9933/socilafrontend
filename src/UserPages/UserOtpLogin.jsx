@@ -25,21 +25,17 @@ function UserOtpLogin() {
   const [invalid, setInvalid] = useState(false);
 
   const generateError = (err) => {
-    console.log("err");
-    console.log("tost");
+   
     toast.error(err, {
       position: "top-right",
     });
   };
 
-  console.log("----------------11--------------------------");
   function callInvalidotptost() {
-    console.log("errorcaller");
     generateError("Invalid OTP");
   }
 
   const resendCaller = () => {
-    console.log("reeesend");
 
     axios.get(`${baseUrl}/auth/otplogin/${phone.slice(3)}`).then((res) => {
       if (!res.data.user) {
@@ -64,7 +60,6 @@ function UserOtpLogin() {
   };
 
   function onCaptchVerify() {
-    console.log("----------------12--------------------------");
     setErrorControler(true);
     if (!window.ecaptchaVerifier) {
       window.recaptchaVerifier = new RecaptchaVerifier(
@@ -82,11 +77,9 @@ function UserOtpLogin() {
   }
 
   function startTimer() {
-    console.log("timer");
 
     let myInterval = setInterval(() => {
       setTimer(timer + 1);
-      console.log(timer);
     }, 1000);
     setTimeout(() => {
       clearInterval(myInterval);
@@ -97,11 +90,9 @@ function UserOtpLogin() {
   function onsignup() {
     setErrorControler(false);
 
-    console.log("----------------13--------------------------");
 
     setLoading(true);
 
-    console.log("signuop");
 
     if (!phone) {
       setLoading(false);
@@ -122,7 +113,6 @@ function UserOtpLogin() {
       axios.get(`${baseUrl}/auth/otplogin/${phone.slice(3)}`).then((res) => {
         if (!res.data.user) {
           setLoading(false);
-          console.log("----------------15--------------------------");
           generateError("Mobile number not registered");
           return null;
         } else {
@@ -133,7 +123,6 @@ function UserOtpLogin() {
           const formatPh = "+" + phone;
           signInWithPhoneNumber(auth, formatPh, appVerifier)
             .then((confimationResult) => {
-              console.log("----------------16--------------------------");
               setErrorControler(true);
               window.confimationResult = confimationResult;
               setLoading(false);
@@ -143,8 +132,6 @@ function UserOtpLogin() {
               toast.success("Otp sent successfully!");
             })
             .catch((error) => {
-              console.log(error);
-              console.log("errorControler", errorControler);
               if (errorControler) {
                 toast.success("Otp sent successfully!");
               } else {
@@ -192,8 +179,7 @@ function UserOtpLogin() {
           const appVerifier = window.recaptchaVerifier;
 
           // Reset reCAPTCHA widget
-          console.log("window.recaptchaVerifier");
-          console.log(window.recaptchaVerifier);
+       
           if (window.recaptchaWidgetId) {
             window.grecaptcha.reset(window.recaptchaWidgetId);
           }
@@ -228,7 +214,6 @@ function UserOtpLogin() {
     setInvalid(true);
 
     setTimeout(() => {
-      console.log("timeout");
       setInvalid(false);
     }, 2000);
   };
@@ -236,13 +221,11 @@ function UserOtpLogin() {
   function onOTPVerify() {
     manageinvalidOtp();
 
-    console.log("-------1----------");
     setLoading(true);
     window.confimationResult
       .confirm(otp)
       .then(async (res) => {
-        console.log("then");
-        console.log(res);
+      
         setUser(res.user);
         setLoading(false);
         axios.get(`${baseUrl}/auth/otpverify/${phone.slice(3)}`).then((res) => {
@@ -255,8 +238,7 @@ function UserOtpLogin() {
         });
       })
       .catch((error) => {
-        console.log(error);
-        console.log("catcherrorerror");
+    
         setLoading(false);
         callInvalidotptost();
       });

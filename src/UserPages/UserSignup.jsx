@@ -48,7 +48,7 @@ export default function UserSignup() {
             document.cookie = `jwt=${token}`;
 
             const verifyUser = async () => {
-              if (!cookies.jwt) {
+              if (!token) {
                 navigate("/userLogin");
               } else {
 

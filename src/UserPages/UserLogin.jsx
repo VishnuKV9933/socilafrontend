@@ -59,20 +59,15 @@ const UserLogin = () => {
           }
         } else {
           const token = data.token;
-          console.log(token, "tokendddddddddddddddddd");
-          console.log("here at user login");
           document.cookie = `jwt=${token}`;
 
           const verifyUser = async () => {
-            console.log("-----1-----");
 
-            console.log("cookies.jwt",cookies.jwt);
 
-            if (!cookies.jwt) {
+            if (!token) {
               navigate("/userLogin");
-            } else {
-              console.log("-----2-----");
-              console.log(token);
+            } else
+             {
 
               const { data } = await axios.post(
                 `${baseUrl}/auth`,
@@ -82,17 +77,12 @@ const UserLogin = () => {
                 }
               );
 
-              console.log("data-----", data);
 
               if (!data.status) {
-                console.log("-----6-----");
 
                 removeCookie("jwt");
                 navigate("/userLogin");
               } else {
-                console.log(
-                  "--------------------------last------------------------------"
-                );
 
                 localStorage.setItem("userId", JSON.stringify(data.user._id));
 
@@ -101,18 +91,15 @@ const UserLogin = () => {
             }
           };
 
-console.log("before call");
 
-(function (){
-  console.log("test");
-}())
+
 
           verifyUser();
         }
       }
     } catch (err) {
       console.log(err);
-      console.log("data");
+      
     }
   };
  const styles = {

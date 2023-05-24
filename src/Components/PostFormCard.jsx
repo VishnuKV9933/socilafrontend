@@ -48,7 +48,6 @@ function PostFormCard2({postAlert,
     }}
 
 
-console.log("textareaRef.current",textareaRef.current);
 
 
   const selectFile=(e)=>{
@@ -68,7 +67,6 @@ console.log("textareaRef.current",textareaRef.current);
     const jwt = cookies.jwt;
 
     if(file){
-      console.log("file:",file[0].type);
     }
     if(file&&description){
       data.append("image", file[0]);
@@ -106,7 +104,6 @@ console.log("textareaRef.current",textareaRef.current);
 // socket.current.emit("sendPost",notice)
 
    axios.post(`${baseUrl}/notification/post`,data.data).then((data)=>{
-        console.log(data);
       })
 
       })

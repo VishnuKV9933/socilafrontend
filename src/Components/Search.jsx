@@ -34,48 +34,39 @@ function Search({searchPasser}) {
 
      
       if(inputRef.current.value.trim()===""){
-        console.log("maan kudigi");
         setSeacrhData(null)
         setMessage("")
         return
       }
 
         if(data.trim()===""){
-          console.log("return");
           setSeacrhData(null)
           setMessage("")
             return
         }
 
-        console.log("-----11-------");
-        console.log(data);
         let timeout;
         let search=data;
    
           const later = () => {
-            console.log("-----22-------");
 
             clearTimeout(timeout);
             const fetchData=async()=>{
-                console.log("-----33-------");
 
          let searchResult = await axios.get(`${baseUrl}/users/user/${userId}/search?search=${search}`,)
                  let {data,message}=searchResult.data
-            //  setSeacrhData(searchResult.data)
-            
-            // if(!data)
+           
             
             if(!data){
               if(message){
                 setMessage("No data found")
                 setSeacrhData(null)
-                // console.log("message",message);
-                // setSeacrhData(true)
+               
               }
             }else{
               setMessage("")
               setSeacrhData(data)
-              // console.log("searchData",data);
+            
             }
 
              }

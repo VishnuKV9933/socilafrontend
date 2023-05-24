@@ -32,11 +32,9 @@ function Navigation() {
 
   
 //     socket.current.on('toall',(data)=>{
-//       console.log("toall");
-//       console.log(data);
+
 //     })
 //     socket.current.on('getNotice',(data)=>{
-//       console.log("data",data);
 //      setCount(data)
 
 //     })

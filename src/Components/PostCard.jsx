@@ -76,7 +76,6 @@ function PostCard({ post,
       });
       setPostUser(user.data)
     if(!user?.data?.profilePicture){
-      console.log("");
       
     }else{
       setProfileImage(user?.data?.profilePicture)
@@ -122,7 +121,6 @@ function PostCard({ post,
       const Obj=post
       Obj.likerId=userId
       axios.post(`${baseUrl}/notification/likepost`,Obj).then((data)=>{
-        console.log(data);
       })
   };
 
@@ -130,10 +128,8 @@ function PostCard({ post,
     try {
         axios.delete(`${baseUrl}/users/deletepost/${_id}`).then((data)=>{
          
-          console.log("delete",data.data);
      
     axios.get(`${baseUrl}/users/getposts/${userId}`).then((data) => {
-      console.log("yes");
     setPost(data.data.posts);
   })
   .catch((data)=>console.log(data))
@@ -153,7 +149,6 @@ function PostCard({ post,
     const likedUsers=async()=>{
       
       const res =await axios.get(`${baseUrl}/users/getlikedpeople/${post._id}`)
-      console.log("likedUser:",res);      
       setLikedUser(res.data)
     }
     likedUsers()
@@ -162,7 +157,6 @@ function PostCard({ post,
   const postCaller =async () => {
 
      axios.get(`${baseUrl}/users/getposts/${userId}`).then((data) => {
-      console.log("postcaller1",data);
   
          setPost(data.data.posts )
        

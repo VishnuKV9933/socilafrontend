@@ -188,7 +188,6 @@ getConversation()
         
         if(newMessage.trim()!==''){
             if(!newChat){
-    console.log("submit not new chat");
             
     setCount(count+1)
 
@@ -215,7 +214,6 @@ getConversation()
                 setNewMessage('')
     
             }else{
-                console.log("submit  new chat");
 
         // new chat without converstaion registered
                     const [id,userId]=currentChat.members
