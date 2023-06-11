@@ -49,9 +49,10 @@ export default function UserSignup() {
 
             const verifyUser = async () => {
               if (!token) {
+                console.log("notoken");
                 navigate("/userLogin");
               } else {
-
+                console.log("token",token);
                 const { data } = await axios.post(
                   `${baseUrl}/auth`,
                   {},
@@ -67,6 +68,7 @@ export default function UserSignup() {
                   localStorage.setItem("userId", JSON.stringify(data.user._id));
 
                   navigate("/");
+                  console.log("/");
                 // }
               }
             };
