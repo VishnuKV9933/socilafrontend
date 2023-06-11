@@ -85,7 +85,6 @@ const UserLogin = () => {
               } else {
 
                 localStorage.setItem("userId", JSON.stringify(data.user._id));
-
                 navigate("/");
               }
             }
@@ -104,16 +103,20 @@ const UserLogin = () => {
   };
  const styles = {
     fontFamily: 'Georgia, serif',
+
+      color: '#065666', // Replace with the actual hex code of bg-blue-800
+    
   };
+
   return (
     <div>
-      <div className="bg-gradient-to-tr from-fuchsia-500 to-sky-300">
+      <div className="bg-gradient-to-tr from-blue-200 to-sky-100">
         <section
           id="login"
           className="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto"
         >
           <div className="p-6 bg-sky-50 rounded">
-            <div className="flex items-center justify-center  font-black m-3 mb-12">
+            <div  className="flex items-center justify-center text-blue-800 font-black m-3 mb-12">
               <h1 style={styles} className="tracking-wide text-3xl text-gray-900 ">
                 NEW WORLD
               </h1>
@@ -122,7 +125,7 @@ const UserLogin = () => {
               onSubmit={handleSubmit(onSubmit)}
               className="flex flex-col justify-center"
             >
-              <label className="text-sm font-medium">Email</label>
+              <label className="text-sm font-medium text-sky-800">Email</label>
               <input
                 className="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -146,7 +149,7 @@ const UserLogin = () => {
                 <p style={{ color: "red" }}>Email is not valid.</p>
               )}
 
-              <label className="text-sm font-medium">Password</label>
+              <label className="text-sm font-medium text-sky-800">Password</label>
               <input
                 className="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -169,8 +172,12 @@ const UserLogin = () => {
               {errors.password && (
                 <p style={{ color: "red" }}>{errors.password.message}</p>
               )}
-              <button
+              {/* <button
                 className="mt-6 px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-pink-600 to-red-600 font-medium text-gray-100 block transition duration-300"
+                type="submit"
+              > */}
+               <button
+                className="mt-6 px-4 py-1.5 rounded-md shadow-lg bg-sky-700 font-medium text-gray-100 block transition duration-300"
                 type="submit"
               >
                 <span id="login_default_state">

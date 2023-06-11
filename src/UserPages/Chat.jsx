@@ -151,7 +151,7 @@ getConversation()
         const getMessage=async ()=>{
             try {
                 const res =await messageService.getMessages(currentChat?._id)
-                setMessages(res.data)
+                setMessages(res?.data)
             } catch (error) {
                console.log(error);
             }

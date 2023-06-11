@@ -26,7 +26,7 @@ function LayOut() {
       });
 
       setUser(user.data);
-      setProfileCardName(user.data.username);
+      setProfileCardName(user?.data.username);
       setProfileCardUrl(
         user?.data?.profilePicture
           ? user?.data?.profilePicture

@@ -60,14 +60,14 @@ export default function UserSignup() {
                   }
                 );
 
-                if (!data.status) {
-                  removeCookie("jwt");
-                  navigate("/userLogin");
-                } else {
+                // if (!data.status) {
+                //   removeCookie("jwt");
+                //   navigate("/userLogin");
+                // } else {
                   localStorage.setItem("userId", JSON.stringify(data.user._id));
 
                   navigate("/");
-                }
+                // }
               }
             };
 
@@ -81,10 +81,13 @@ export default function UserSignup() {
   };
   const styles = {
     fontFamily: 'Georgia, serif',
+
+      color: '#065666', // Replace with the actual hex code of bg-blue-800
+    
   };
   return (
     <div className="App">
-      <div class="bg-gradient-to-tr from-fuchsia-500 to-sky-300">
+      <div class="bg-gradient-to-tr from-blue-200 to-sky-100">
         <section
           id="login"
           class="p-4 flex flex-col justify-center min-h-screen max-w-md mx-auto"
@@ -98,7 +101,7 @@ export default function UserSignup() {
               onSubmit={handleSubmit(onSubmit)}
               class="flex flex-col justify-center"
             >
-              <label class="text-sm font-medium">Name</label>
+              <label class="text-sm font-medium text-sky-900">Name</label>
               <input
                 class="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -122,7 +125,7 @@ export default function UserSignup() {
                 <p style={{ color: "red" }}>{errors.name.message}</p>
               )}
 
-              <label class="text-sm font-medium">Email</label>
+              <label class="text-sm font-medium text-sky-900">Email</label>
               <input
                 class="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -147,7 +150,7 @@ export default function UserSignup() {
                 <p style={{ color: "red" }}>Email is not valid.</p>
               )}
 
-              <label class="text-sm font-medium">Mobile Number</label>
+              <label class="text-sm font-medium text-sky-900">Mobile Number</label>
               <input
                 class="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -171,7 +174,7 @@ export default function UserSignup() {
                 <p style={{ color: "red" }}>Mobile is not valid.</p>
               )}
 
-              <label class="text-sm font-medium">Password</label>
+              <label class="text-sm font-medium text-sky-900">Password</label>
               <input
                 class="mb-3 px-2 py-1.5
           mb-3 mt-1 block w-full px-2 py-1.5 border border-gray-300 rounded-md text-sm shadow-sm placeholder-gray-400
@@ -244,7 +247,7 @@ export default function UserSignup() {
               </div>
                  {errors.field && <p style={{color:"red"}}>{errors.field.message}</p>} */}
               <button
-                class="mt-6 px-4 py-1.5 rounded-md shadow-lg bg-gradient-to-r from-pink-600 to-red-600 font-medium text-gray-100 block transition duration-300"
+                class="mt-6 px-4 py-1.5 rounded-md shadow-lg bg-sky-700 font-medium text-gray-100 block transition duration-300"
                 type="submit"
               >
                 <span id="login_default_state">

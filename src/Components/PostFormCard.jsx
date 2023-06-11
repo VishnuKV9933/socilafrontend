@@ -137,7 +137,6 @@ function PostFormCard2({postAlert,
 
 
         <div id="photo&share" className="flex w-1/4 gap-2">
-        {/* file[0].type!=="image/jpeg"||file[0].type!=="image/jpg"||file[0].type!=="image/jpg" */}
           <label className="flex justify-center h-10 items-center rounded-xl w-1/2 hover:h-11  h:text-white  border-solid">
             <div id="photo">
               <input
@@ -152,12 +151,7 @@ function PostFormCard2({postAlert,
           </label>
 
 <ShareButton/>
-          {/* <button
-            type="submit"
-            id="share"
-            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition duration-300 ease-in-out transform hover:-translate-y-1 hover:scale-110">
-            share
-          </button> */}
+        
 
         </div>
       </form>

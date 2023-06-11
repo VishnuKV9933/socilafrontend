@@ -87,8 +87,8 @@ function Search({searchPasser}) {
                 debouncedSearch(e.target.value,500)
                
             }}
-               className="w-full  bg-gradient-to-b from-pink-200  to-blue-200 hover:from-blue-200
-                hover:to-pink-200 rounded-3xl mb-2 flex-row items-center 
+               className="w-full  bg-gradient-to-b from-sky-200  to-sky-00 hover:from-blue-200
+                hover:to-pink-00 rounded-3xl mb-2 flex-row items-center 
                 shadow-lg shadow-gray-200  border-amber-500	  p-4" placeholder="search " />
                 <div className='ml-10 text-blue-300 italic font-serif' >{message}</div>
 

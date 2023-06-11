@@ -13,6 +13,11 @@ const userId = JSON.parse(localStorage.getItem('userId'));
 // setValidate(true)
 useEffect(()=>{
   const getPostUser = async () => {
+
+    if(!userId){removeCookie("jwt");
+    localStorage.removeItem("userId"); 
+    navigate("/userLogin");
+  }
    
     const res = await axios.post(`${baseUrl}/users/getuser`, {
       userId:userId
@@ -29,14 +34,12 @@ useEffect(()=>{
 useEffect(()=>{
 
   const verifyUser = async () => {
-    console.log("-----1-----");
 
     if (!cookies.jwt) {
 
       navigate("/userLogin");
     } else {
 
-      console.log("-----2-----");
 
       const { data } = await axios.post(
         `${baseUrl}/auth`,
@@ -46,9 +49,6 @@ useEffect(()=>{
         }
       );
       if (!data.status) {
-        console.log("-----3-----");
-
-       
         removeCookie("jwt");
         localStorage.removeItem("userId"); 
         navigate("/userLogin");
@@ -69,10 +69,8 @@ useEffect(()=>{
 
 },[])  
    
-
-
- 
-  return (userId)? <Outlet /> : <Navigate to="/userlogin" />
+  // return (userId)? <Outlet /> : <Navigate to="/userlogin" />
+  return  <Outlet /> 
 }
 
 export default Protect
