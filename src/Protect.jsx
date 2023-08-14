@@ -18,7 +18,6 @@ useEffect(()=>{
     localStorage.removeItem("userId"); 
     navigate("/userLogin");
   }
-   
     const res = await axios.post(`${baseUrl}/users/getuser`, {
       userId:userId
     });
@@ -31,43 +30,40 @@ useEffect(()=>{
   getPostUser()
 },[userId])
 
-useEffect(()=>{
+// useEffect(()=>{
 
-  const verifyUser = async () => {
+//   const verifyUser = async () => {
 
-    if (!cookies.jwt) {
+//     if (!cookies.jwt) {
 
-      navigate("/userLogin");
-    } else {
+//       navigate("/userLogin");
+//     } else {
 
 
-      const { data } = await axios.post(
-        `${baseUrl}/auth`,
-        {},
-        {
-          withCredentials: true,
-        }
-      );
-      if (!data.status) {
-        removeCookie("jwt");
-        localStorage.removeItem("userId"); 
-        navigate("/userLogin");
+//       const { data } = await axios.post(
+//         `${baseUrl}/auth`,
+//         {},
+//         {
+//           withCredentials: true,
+//         }
+//       );
+//       if (!data.status) {
+//         removeCookie("jwt");
+//         localStorage.removeItem("userId"); 
+//         navigate("/userLogin");
       
-      } else {
+//       } else {
+//        navigate("/")
        
-       
-       
-       navigate("/")
-       
-      }
+//       }
       
-    }
-  };
+//     }
+//   };
   
 
-  verifyUser();
+//   verifyUser();
 
-},[])  
+// },[])  
    
   // return (userId)? <Outlet /> : <Navigate to="/userlogin" />
   return  <Outlet /> 
