@@ -3,8 +3,8 @@ export const defaultProfilePicUrl="https://cdn.pixabay.com/photo/2015/10/05/22/3
 
 // export const baseUrl="http://localhost:7000/api"
 
-export const baseUrl="https://react-social-backend.onrender.com"
-
+export const baseUrl="https://react-social-backend.onrender.com/api"
+ 
 
 export const axiosInstance = axios.create({
   baseURL: baseUrl,
