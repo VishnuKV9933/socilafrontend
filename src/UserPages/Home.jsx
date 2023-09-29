@@ -7,6 +7,7 @@ import "../Icons/input.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setPosts } from "../redux/store";
 import userService from "../ServiceLayer/userSevice";
+import { welcomeImage } from "../Utility/utility";
 
 function Home() {
   const [user, setUser] = useState(null);
@@ -36,33 +37,14 @@ function Home() {
       setPost(data.posts);
     };
     posts();
-    // axiosInstance
-    //   .get(
-    //     `/users/getposts/${userId}`
-    //     // {cancelToken: source1.token}
-    //   )
-    //   .then((data) => {
-    //     // redux
-    //     // impoerting from store and adding to state
-    //     // dispatch(
-    //     //   setPosts({
-    //     //     posts: data.data.posts,
-    //     //   })
-    //     // );
-    //     setPost(data.data.posts);
-    //   });
+ 
   }, []);
 
   const postAlert = async () => {
     const data = await userService.getPosts(userId);
     setPost(data.posts);
-      // impoerting from store and adding to state
-      // redux
-      // dispatch(
-      //   setPosts({
-      //     posts: data.data.posts,
-      //   })
-      // );
+
+
       setPost(data.posts);
    
   };
@@ -72,6 +54,9 @@ function Home() {
       <div>
         <PostFormCard posts={posts} setPost={setPost} postAlert={postAlert} />
       </div>
+
+      {
+        posts.length ?
 
       <div className=" ">
         {posts?.map((post) => {
@@ -86,6 +71,13 @@ function Home() {
           );
         })}
       </div>
+      :
+
+      <div className="w-full h-fit ">
+        <img className="w-full h-fit" src={welcomeImage} alt="" />
+      </div>
+      }
+
     </div>
   );
 }
