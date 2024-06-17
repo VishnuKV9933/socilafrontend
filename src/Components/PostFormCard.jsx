@@ -8,19 +8,15 @@ import { useCookies } from "react-cookie";
 import ShareButton from "./SharaButton";
 import {io} from 'socket.io-client'
 import { baseUrl } from "../Utility/utility";
-
-// import { useDispatch, useSelector } from "react-redux";/redux
-// import { setPosts } from "../redux/store";
-
+import './postFormCard.css'
+import { useDispatch, useSelector } from "react-redux";
+import { setAllPosts } from "../redux/userSlice";
+import { IoMdCloseCircle } from "react-icons/io";
 function PostFormCard2({postAlert,
-  posts,
-  setPost
 }) {
-  // redux
-  // const dispatch = useDispatch()
-  // const posts = useSelector(state=> state.posts)
+  const {userPosts} = useSelector((state) => state.user);
+  const dispatch = useDispatch()
   const socket =useRef()
-
   const [description, setDescription] = useState("");
   const [file, setfile] = useState(null);
   const textareaRef = useRef(null);
@@ -28,7 +24,7 @@ function PostFormCard2({postAlert,
  
   useEffect(()=>{
  
-    const userId = JSON.parse(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
 
     socket.current=io('ws://localhost:8900')
 
@@ -51,6 +47,7 @@ function PostFormCard2({postAlert,
 
 
   const selectFile=(e)=>{
+    alert('onchange')
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {
       setfile(e.target.files)
@@ -66,14 +63,12 @@ function PostFormCard2({postAlert,
     const data = new FormData();
     const jwt = cookies.jwt;
 
-    if(file){
-    }
     if(file&&description){
       data.append("image", file[0]);
       data.append("description", description);
-    }else if(file){
+    }else if(file && description?.trim()===""){
       data.append("image", file[0]);
-    }else if(description?.trim()!==""){
+    }else if(description?.trim()!=="" && !file){
       data.append("description", description);
     }else{
       return
@@ -84,14 +79,10 @@ function PostFormCard2({postAlert,
         headers: { ContentType: "multipart/form-data", jwt: jwt },
       })
       .then((data) => {
-        // redux
-    //  dispatch(setPosts({
-    //   posts : [data.data, ...posts]
-    //  }))
-    setPost([data.data, ...posts])
+ 
+    dispatch(setAllPosts([data.data, ...userPosts]))
        setDescription(null)
        setfile(null)
-       postAlert()
        textareaRef.current.value='';
 
         
@@ -156,17 +147,21 @@ function PostFormCard2({postAlert,
         </div>
       </form>
       {file && (
-        <div className="flex  mt-2 w-full">
-          <div>
-          <img className="rounded" src={URL.createObjectURL(file[0])} alt="img" />
-          </div>
+        <div className="flex  mt-2 w-full ">
+        
+      
+           
+
+          <img className="image  rounded ml-10" src={URL.createObjectURL(file[0])} alt="img" />
+          
          
-          <HiOutlineTrash
-            className="w-12 h-12 items-center"
+          <IoMdCloseCircle
+            className="w-4 h-4 items-center text-white"
             onClick={() => {
               setfile(null);
             }}
           />
+          
         </div>
       )}
     </Card2>

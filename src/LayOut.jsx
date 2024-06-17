@@ -13,13 +13,14 @@ function LayOut() {
   const { profilCardUrl, setProfileCardUrl } = useContext(
     ProfileCardUrlContext
   );
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   const [suggestion, setSuggestion] = useState([]);
   const [user, setUser] = useState(null);
   const [suggestionDisplayController, setSuggestionDisplayController] =
     useState(true);
 
   useEffect(() => {
+    console.log("USER ID :",userId);
     const getUser = async () => {
       const user = await axios.post(`${baseUrl}/users/getuser`, {
         userId: userId,

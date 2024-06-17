@@ -12,7 +12,7 @@ const UserLogin = () => {
 
   const navigate = useNavigate();
 
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
 
   useEffect(() => {
     if (!userId) {
@@ -84,7 +84,7 @@ const UserLogin = () => {
                 navigate("/userLogin");
               } else {
 
-                localStorage.setItem("userId", JSON.stringify(data.user._id));
+                localStorage.setItem("userId", data.user._id);
                 navigate("/");
               }
             }

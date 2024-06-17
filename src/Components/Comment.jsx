@@ -23,13 +23,13 @@ function Comment({ comment,postUserId,postId,setArrayLength,limit,commetnReducer
 
   const [deleteAllComment,setDleteAllComment]=useState(false)
 
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   
   const {allComments, setAllComments}=useContext(CommentContextSet);
 
   useEffect(()=>{
 
-    const userId = JSON.parse(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
     if(userId===comment.userId){
       setDeleteComment(true)
     }

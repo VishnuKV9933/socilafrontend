@@ -2,22 +2,18 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PostFormCard from "../Components/PostFormCard";
 import PostCard from "../Components/PostCard";
-// import SearchCard from "../Components/RoundedCard";
 import "../Icons/input.css";
 import { useDispatch, useSelector } from "react-redux";
-import { setPosts } from "../redux/store";
+import { setAllPosts } from "../redux/userSlice"; 
 import userService from "../ServiceLayer/userSevice";
 import { welcomeImage } from "../Utility/utility";
 
 function Home() {
+  const {userPosts} = useSelector((state)=>state.user)
   const [user, setUser] = useState(null);
-  // dispatch to set state
   const dispatch = useDispatch();
-  // to get state
-  // const posts = useSelector((state) => state.posts);//redux
   const [posts, setPost] = useState([]);
-  const navigate = useNavigate();
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
  
 
   useEffect(() => {
@@ -35,36 +31,27 @@ function Home() {
     const posts = async () => {
       const data = await userService.getPosts(userId);
       setPost(data.posts);
+      dispatch(setAllPosts(data.posts))
     };
     posts();
  
   }, []);
 
-  const postAlert = async () => {
-    const data = await userService.getPosts(userId);
-    setPost(data.posts);
-
-
-      setPost(data.posts);
-   
-  };
-
   return (
     <div className=" w-full ">
       <div>
-        <PostFormCard posts={posts} setPost={setPost} postAlert={postAlert} />
+        <PostFormCard  />
       </div>
 
       {
-        posts.length ?
+        userPosts?.length ?
 
       <div className=" ">
-        {posts?.map((post) => {
+        {userPosts?.map((post) => {
           return (
             <PostCard
               key={post._id}
               post={post}
-              postAlert={postAlert}
               posts={posts}
               setPost={setPost}
             />

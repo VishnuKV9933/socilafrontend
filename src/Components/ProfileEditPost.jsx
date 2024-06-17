@@ -19,7 +19,7 @@ function EditPost({postId ,setEditOpen,
   // const { postId } = useParams();
 const [initialFile,setInitialFile] =useState(null)
 const [deleteImage,setDeleteImage]=useState(false)
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
 
 let post=null
 

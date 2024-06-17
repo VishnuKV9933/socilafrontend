@@ -9,7 +9,7 @@ const navigate=useNavigate()
 const [cookies,removeCookie] = useCookies();
 
 // const [validate,setValidate]=useState(null)
-const userId = JSON.parse(localStorage.getItem('userId'));
+const userId = localStorage.getItem('userId');
 // setValidate(true)
 useEffect(()=>{
   const getPostUser = async () => {

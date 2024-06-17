@@ -16,7 +16,7 @@ function ReportPostCard({ post,
   posts,
   setPost
   }) {
-    const userId = JSON.parse(localStorage.getItem("userId"));
+    const userId = localStorage.getItem("userId");
     const [limit, setLimit] = useState(0);
     const [isliked, setIsLiked] = useState(post?.like?.includes(userId));
     const [like, setLike] = useState(post?.like?.length);

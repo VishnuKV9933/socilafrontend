@@ -6,49 +6,24 @@ import reportWebVitals from "./reportWebVitals";
 import UserContext from "./Context/UserContext";
 import ProfileContext from "./Context/ProfileContext";
 import CommentContext from "./Context/CommetContext";
-import authReducer from "./redux/store";
+import { store } from "./redux/store";
 
-import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import {
-  persistStore,
-  persistReducer,
-  FLUSH,
-  REHYDRATE,
-  PAUSE,
-  PERSIST,
-  PURGE,
-  REGISTER,
-} from "redux-persist";
+
 import storage from "redux-persist/lib/storage";
-import { PersistGate } from "redux-persist/integration/react";
 import User from "./Context/UserContext";
 import ProflePicContext from "./Context/ProflePicContext";
 import CurrentChatContext from "./Context/ChatContext";
 
-const persistConfig = {
-  key: "root",
-  storage,
-  version: 1,
-  blacklist: ["chats", "currentChat", "messages", "loading"],
-};
-const persistedReducer = persistReducer(persistConfig, authReducer);
-const store = configureStore({
-  reducer: persistedReducer,
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: {
-        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
-      },
-    }),
-});
+
+
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <ProfileContext>
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistStore(store)}>
+    <ProfileContext>
+       
           <UserContext>
             <CommentContext>
               <User>
@@ -60,9 +35,9 @@ root.render(
               </User>
             </CommentContext>
           </UserContext>
-        </PersistGate>
-      </Provider>
+       
     </ProfileContext>
+      </Provider>
   </React.StrictMode>
 );
 

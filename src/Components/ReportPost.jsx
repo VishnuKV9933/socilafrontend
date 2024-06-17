@@ -3,7 +3,7 @@ import React from 'react'
 import { baseUrl } from '../Utility/utility';
 
 function ReportPost({setMore,setReportOpen,postId,postUser,setPost}) {
-    const userId = JSON.parse(localStorage.getItem('userId'));
+    const userId = localStorage.getItem('userId');
 
     const reporter=async(reason)=>{
 

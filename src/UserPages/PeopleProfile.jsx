@@ -9,7 +9,7 @@ import { baseUrl, defaultProfilePicUrl } from "../Utility/utility";
 import { ChatContext } from "../Context/ChatContext";
 import Modal from "../Components/Modal";
 const PeopleProfile = () => {
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  const userId = localStorage.getItem("userId");
   let { id } = useParams()
 
   const {setCurrentChat}= useContext(ChatContext)

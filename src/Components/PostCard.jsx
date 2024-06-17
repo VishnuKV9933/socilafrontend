@@ -14,15 +14,18 @@ import { defaultProfilePicUrl,baseUrl } from "../Utility/utility";
 // import it first.
 import vi from 'timeago.js/lib/lang/vi';
 import RepostPost from "./ReportPost";
+import { useSelector,useDispatch } from "react-redux";
+import { setAllPosts } from "../redux/userSlice";
 timeago.register('vi', vi);
-
-// import { useInView } from 'react-intersection-observer';
 
 function PostCard({ post,
   posts,
   setPost
   }){
-  const userId = JSON.parse(localStorage.getItem("userId"));
+  
+  const dispatch = useDispatch()
+
+  const userId = localStorage.getItem("userId");
   const [limit, setLimit] = useState(0);
   const [isliked, setIsLiked] = useState(post?.like?.includes(userId));
   const [like, setLike] = useState(post?.like?.length);
@@ -128,12 +131,12 @@ function PostCard({ post,
     try {
         axios.delete(`${baseUrl}/users/deletepost/${_id}`).then((data)=>{
          
-     
-    axios.get(`${baseUrl}/users/getposts/${userId}`).then((data) => {
-    setPost(data.data.posts);
-  })
-  .catch((data)=>console.log(data))
-  ;
+          postCaller()
+  //   axios.get(`${baseUrl}/users/getposts/${userId}`).then((data) => {
+  //   setPost(data.data.posts);
+  // }
+  // )
+  // .catch((data)=>console.log(data));
         } )
       setDeleteOpen(false)
       setMore(false)
@@ -156,11 +159,15 @@ function PostCard({ post,
   
   const postCaller =async () => {
 
-     axios.get(`${baseUrl}/users/getposts/${userId}`).then((data) => {
-  
-         setPost(data.data.posts )
-       
-     });
+    const response = await  axios.get(`${baseUrl}/users/getposts/${userId}`)
+
+    if(!response.data.posts){
+      return
+    }else{
+      dispatch(setAllPosts(response.data.posts))
+    }
+
+
    };
    
 
@@ -299,7 +306,7 @@ function PostCard({ post,
             {/* <div className="text-lg font-medium mt-4">Post Title</div> */}
             <div  className="text-gray-600 mt-6 mb-4 text-blue-900">{post.description}</div>
             {post.imageUrl && (
-              <img src={post.imageUrl} alt="Post" className="w-full h-auto" />
+              <img src={post.imageUrl} alt="Post" className="w-full h-[350px]" />
               
             )}
                
