@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -10,6 +10,15 @@ export default function UserSignup() {
   const [cookies, removeCookie] = useCookies([]);
 
   const navigate = useNavigate();
+
+  const userId = localStorage.getItem("userId");
+
+  useEffect(() => {
+    if (!userId) {
+    } else {
+      navigate("/home");
+    }
+  }, []);
 
   const generateError = (err) => {
     toast.error(err, {
@@ -67,8 +76,7 @@ export default function UserSignup() {
                 // } else {
                   localStorage.setItem("userId", JSON.stringify(data.user._id));
 
-                  navigate("/");
-                  console.log("/");
+                  navigate("/home");
                 // }
               }
             };

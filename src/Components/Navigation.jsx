@@ -47,7 +47,7 @@ function Navigation() {
         <h2>Navigation</h2>
 <div className='' >
 
-          <NavLink  to='/' className="font-extrabold flex items-center transition-all  hover:rounded-full hover:ml-6   gap-2 py-3">
+          <NavLink  to='/home' className="font-extrabold flex items-center transition-all  hover:rounded-full hover:ml-6   gap-2 py-3">
             <RiHomeLine className="  w-8 h-8 font-bold" />
             HOME
             </NavLink>

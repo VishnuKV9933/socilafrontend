@@ -17,7 +17,7 @@ const UserLogin = () => {
   useEffect(() => {
     if (!userId) {
     } else {
-      navigate("/");
+      navigate("/home");
     }
   }, [user]);
 
@@ -85,7 +85,7 @@ const UserLogin = () => {
               } else {
 
                 localStorage.setItem("userId", data.user._id);
-                navigate("/");
+                navigate("/home");
               }
             }
           };

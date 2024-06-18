@@ -17,14 +17,16 @@ import AdminPost from "./AdminPages/AdminPost";
 import Notification from "./UserPages/Notification";
 import AdminDashBoard from "./AdminPages/AdminDashBoard";
 import Protect from "./Protect";
+import LandingPage from "./UserPages/LandingPage";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
+      <Route exact path="/" element={<LandingPage />} />
         <Route element={<Protect />}>
           <Route element={<LayOut />}>
-            <Route exact path="/" element={<Home />} />
+            <Route exact path="/home" element={<Home />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/peopleprofile/:id" element={<PeopleProfile />} />
             <Route path="/chat" element={<Chat />} />
