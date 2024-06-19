@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 
-import landingPageImage from '../Assets/Landingpage.webp';
+import landingPageImage from '../Assets/socialimg.gif';
 import { Link, useNavigate } from 'react-router-dom';
 export default function LandingPage() {
     const navigate = useNavigate();

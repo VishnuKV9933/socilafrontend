@@ -47,7 +47,6 @@ function PostFormCard2({postAlert,
 
 
   const selectFile=(e)=>{
-    alert('onchange')
     const file = e.target.files[0];
     if (file && file.type.startsWith('image/')) {
       setfile(e.target.files)
